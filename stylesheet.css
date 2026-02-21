@@ -7,10 +7,15 @@
 
 .navbar{
     max-width: 100%;
-    padding: 10px;
+    padding: 0 20px;
     background-color: rgb(50, 76, 50);
     box-shadow: 0cqmax;
     animation: pulseZoom 4s ease-in-out infinite;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    justify-content: space-between;
+    
 }
 
 @keyframes pulseZoom{
@@ -41,9 +46,10 @@ padding: 20px;
     padding: 15px;
     list-style: none;
     justify-content: space-between;
-    gap: auto;
+    gap: 20px;
     float: right;
     width: 100%;
+    align-items: center;
 
     .link-list li a:hover{
         color: blue;
@@ -83,4 +89,14 @@ body{
     margin-top: 40px;
     font-size: 18px;
     line-height: 27px;
+}
+
+footer{
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(1, 12, 1);
+    color: white;
+    margin-top: 50px;
+    width: 100%;
+    font-size: medium;
 }
