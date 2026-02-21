@@ -56,6 +56,9 @@ padding: 20px;
     }
 
 }
+link-list li{
+    align-items: center;8;;
+}
 
 a{
     text-decoration: none;
@@ -84,6 +87,7 @@ padding: 10px;
 h1 {
     text-align: center;
     padding: 20px;
+    line-height: 50px;
 }
 body{
     margin-top: 40px;
