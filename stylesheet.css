@@ -41,7 +41,7 @@ padding: 20px;
     padding: 15px;
     list-style: none;
     justify-content: space-between;
-    gap: 30px;
+    gap: auto;
     float: right;
     width: 100%;
 
@@ -57,6 +57,13 @@ a{
     font-weight: bolder;
     font-size: 18px;
     
+}
+
+.buildingdescription{
+    text-align: center;
+    font-size: 16px;
+    color: rgb(50, 76, 50);
+    margin-top: 10px;
 }
 
 .introduction, .conclusion{
