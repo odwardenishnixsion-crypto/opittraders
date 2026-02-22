@@ -112,3 +112,9 @@ img{
     background-color: yellowgreen;
     overflow: auto;
 }
+
+.Location{
+    text-align: center;
+    margin-top: 20px;
+    color: rgb(50, 76, 50);
+}
