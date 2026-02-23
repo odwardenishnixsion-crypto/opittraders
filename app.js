@@ -1,5 +1,15 @@
-var map = L.map('map').setView([51.505, -0.09], 13);
+//JS TODO
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+//select hamburger
+const hamburger = document.querySelector('.hamburger')
+//select link-list
+const navMenu = document.querySelector('.nav-menu')
+//add Even Listener
+hamburger.addEventListener('click', mobileMenu)
+//navmenu function
+//toogle active
+//toogle active
+function mobileMenu() {
+    hamburger.classList.toggle('active')
+    navMenu.classList.toggle('active')
+}
