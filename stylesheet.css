@@ -158,3 +158,12 @@ iframe{
     font-weight: bold;
     margin: 20px;
 }
+
+.nav-logo{
+    margin: 20px;
+    padding: 0;
+    display:inline-flex;
+    max-width: 60px;
+    justify-content: first baseline;
+
+}
