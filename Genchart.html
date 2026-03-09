@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Construction Input Price Index Summary</title>
+    
+    <!-- HIGHCHARTS CORE -->
+    <script src="highcharts.js"></script>
+    <script src="https://code.highcharts.com"></script>
+    
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    
+    <style>
+        :root {
+            --glass: rgba(10, 20, 50, 0.85);
+            --gold: #d4a017;
+            --neon-cyan: #00f2ff;
+            --border: rgba(255, 255, 255, 0.15);
+        }
+
+        body {
+            font-family: 'times new roman';
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6); z-index: -1;
+        }
+
+        .header-section {
+            text-align: center;
+            padding: 30px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 25px;
+        }
+
+        /* Hero Chart Container */
+        .chart-hero {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            height: 500px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .table-container {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        th { color: var(--gold); padding: 20px; text-align: left; text-transform: uppercase; font-size: 13px; letter-spacing: 2px; border-bottom: 2px solid var(--border); }
+        td { padding: 18px 20px; border-bottom: 1px solid var(--border); font-size: 16px; }
+        tr:hover { background: rgba(0, 242, 255, 0.05); cursor: pointer; transition: 0.3s; }
+        
+        .weight-badge { color: var(--neon-cyan); font-weight: 700; background: rgba(0, 242, 255, 0.1); padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(0, 242, 255, 0.3); }
+        .trend-up { color: #00ff88; font-weight: bold; }
+        .trend-down { color: #ff4d4d; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header class="header-section">
+    <h1 style="margin:0; font-weight: 700; letter-spacing: -1px; font-size: 2.5em;">CIPI <span style="color:var(--gold)">Construction Input Price Index Summary for the First Six Months</span></h1>
+    <p style="color: #ccc; margin-top: 5px; font-size: 1.1em;">Construction Input Price Index | UBOS Uganda | Base Year 2016/17 Selected Products</p>
+</header>
+
+<!-- Visual Hero Chart -->
+<div class="chart-hero">
+    <div id="mainVisualChart" style="height: 100%; width: 100%;"></div>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Material Classification</th>
+                <th>Start Weight</th>
+                <th>Current Index</th>
+                <th>Monthly Change</th>
+                <th>Market Statements</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Cement</td>
+                <td><span class="weight-badge">105.76</span></td>
+                <td>108.95</td>
+                <td class="trend-up">+0.0%</td>
+                <td>Stable Supply</td>
+            </tr>
+            <tr>
+                <td>Diesel Fuel</td>
+                <td><span class="weight-badge">86.28</span></td>
+                <td>180.11</td>
+                <td class="trend-down">-0.2%</td>
+                <td>Price Correction</td>
+            </tr>
+            <tr>
+                <td>Steel Bars (High Tensile)</td>
+                <td><span class="weight-badge">25.65</span></td>
+                <td>160.85</td>
+                <td>0.0%</td>
+                <td>High Demand</td>
+            </tr>
+            <tr>
+                <td>Clay Bricks & Tiles</td>
+                <td><span class="weight-badge">24.08</span></td>
+                <td>146.45</td>
+                <td class="trend-down">-0.1%</td>
+                <td>Seasonal Low</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    Highcharts.chart('mainVisualChart', {
+        chart: {
+            type: 'areaspline',
+            backgroundColor: 'transparent',
+            style: { fontFamily: "'Inter', sans-serif" }
+        },
+        title: { 
+            text: 'Market Price Momentum (2025-2026)',
+            style: { color: '#ffffff', fontWeight: '700', fontSize: '20px' }
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: { style: { color: '#ffffff' } },
+            lineColor: 'rgba(255,255,255,0.2)'
+        },
+        yAxis: {
+            title: { text: 'Index Points', style: { color: '#d4a017', fontFamily: 'times new roman', fontSize: '14px' } },
+            labels: { style: { color: '#ffffff' } },
+            gridLineColor: 'rgba(255,255,255,0.05)'
+        },
+        tooltip: {
+            backgroundColor: 'rgba(0,0,0,0.8)',
+            style: { color: '#ffffff', fontFamily: 'times new roman', fontSize: '14px' },
+            shared: true,
+            borderWidth: 1,
+            borderColor: '#00f2ff'
+        },
+        legend: {
+            itemStyle: { color: '#ffffff' }
+        },
+        credits: { enabled: false },
+        series: [{
+            name: 'Price Index Level',
+            data: [126.8, 127.5, 128.9, 128.2, 129.4, 130.1, 101.0, 98.5, 131.2, 132.0, 132.5, 173.0],
+            color: '#00f2ff', // Neon Cyan Line
+            lineWidth: 4,
+            marker: {
+                radius: 6,
+                fillColor: '#d4a017', // Gold Markers
+                lineWidth: 2,
+                lineColor: '#ffffff'
+            },
+            fillColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                stops: [
+                    [0, 'rgba(0, 242, 255, 0.4)'], // Bright Neon at top
+                    [1, 'rgba(0, 242, 255, 0)']     // Fade to invisible
+                ]
+            }
+        }]
+    });
+</script>
+
+</body>
+</html>

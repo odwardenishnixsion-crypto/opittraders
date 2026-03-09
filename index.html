@@ -15,34 +15,34 @@
                             }
         
         body {background-image: url("background.jpg"); background-size: cover; background-attachment: fixed;
-        background-position: center;background-repeat: no-repeat; height: 100vh; margin: 0;
-        font-family: Arial, sans-serif; text-align:center; color:white; width: 100%;}
-        h2 {font-size: 18px; margin-top:20px; color: rgb(247, 245, 247); }
-        .table-wrapper{
-            width:100%;
-            overflow-x:auto;
-            -webkit-overflow-scrolling: touch;
+                    background-position: center;background-repeat: no-repeat; height: 100vh; margin: 0;
+                    font-family: Arial, sans-serif; text-align:center; color:white; width: 100%;}
+                    h2 {font-size: 18px; margin-top:20px; color: rgb(247, 245, 247); }
+                    .table-wrapper{
+                    width:100%;
+                    overflow-x:auto;
+                    -webkit-overflow-scrolling: touch;
                         }
         #priceTable {margin-left: 10px; margin-right: 10px; width:100%; border-collapse: separate; max-width: 100vh;
                     border-spacing: 12px; margin:20px auto; background:rgb(1, 7, 70); color:black;
                     border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 20px; }
-        th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; text-align: center; font-size: 18px; }
-        th { background:#ddd; font-size: 29px; font-weight: bold;}
+                    th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; text-align: center; font-size: 18px; }
+                    th { background:#ddd; font-size: 29px; font-weight: bold; font-family: 'Times New Roman';}
 
-        td{animation: pulseZoom 3s infinite ease-in-out; font-size: 28px;
-            color: white; padding: 12px 25px; text-align: center; font-weight: 600; border-radius: 8px; cursor: pointer;
-            transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0, 0.2); user-select: none;}
-            td:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
+        td{animation: pulseZoom 3s infinite ease-in-out; font-size: 28px; font-family: 'Times New Roman';
+                    color: white; padding: 12px 25px; text-align: center; font-weight: 600; border-radius: 8px; cursor: pointer;
+                    transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0, 0.2); user-select: none;}
+        td:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
                     background: linear-gradient(135deg, #2e59d9, #17a673);}
         td:active{transform: scale(0.95);}
 
 
                                 /* Sticky header row (days) */
-                            #priceTable tr:first-child th {
-                                position: sticky;
-                                top: 0;
-                                background-color: rgb(230, 231, 223);
-                                z-index: 3; /* above everything else */
+        #priceTable tr:first-child th {
+                    position: sticky;
+                    top: 0;
+                    background-color: rgb(230, 231, 223);
+                    z-index: 3; /* above everything else */
                             }
 
                             /* Sticky first column (months) */
@@ -74,11 +74,13 @@
         }
         td:hover{transform: scale(1.1); box-shadow: 0 6px 12px rgba(0, 0, 0, 0, 0.3);}
 
-        iframe {width: 100%; margin-bottom: 10px; border: none; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
+        iframe {width: 100%; margin-bottom: 5px; margin-top: 5px; border: none; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
        /* Chart 3 container */
 #chart3-container {
     width: 95%;
     margin: 20px auto;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 /* Chart 3 iframe */
@@ -87,6 +89,8 @@
     min-height: auto;
     max-height: 1200px;      /* prevents excessive stretching on desktop */
     border: none;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 /* Make iframe containers responsive */
@@ -167,9 +171,163 @@ padding:10px;
 </head>
 <body>
 
-<h1 style="font-size: 26px; text-align: center; color:#fffdff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    Overall Construction Input Price Index Base Period 2016/2017</h1>
-<p Class="infor" style="font-size: 20px;">Click on <strong>Check</strong> buttons of each dates and it's corresponding <br>month bellow to view the corresponding Price Index</p>
+
+<header class="executive-header">
+    <div class="header-glass-container">
+        <div class="status-badge">
+            <span class="status-pulse"></span>
+            Live Market Analytics System
+        </div>
+
+        <h1>Construction Input Price Index (CIPI)</h1>
+        <p class="header-subtitle">
+            Strategic Weight Analysis & Material Ranking Profile <br>
+            <span class="gold-text">Base Period: 2016/17 Fiscal Year</span>
+        </p>
+
+        <div class="header-stats-row">
+            <div class="stat-card">
+                <span class="stat-label">Aggregated Index Weight</span>
+                <strong class="stat-value" id="topTotalWeight">0.00</strong>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Material Classifications</span>
+                <strong class="stat-value">18 Units</strong>
+            </div>
+            <div class="stat-card mobile-hide">
+                <span class="stat-label">Data Authority</span>
+                <strong class="stat-value" style="font-size: 18px;">UBOS Uganda</strong>
+            </div>
+        </div>
+    </div>
+</header>
+
+<style>
+    /* --- HEADER SPECIFIC STYLING --- */
+    .executive-header {
+        padding: 80px 20px 60px;
+        background: radial-gradient(circle at top, #0b1c3d 0%, #00040a 100%);
+        font-family: 'Times New Roman', Times, serif;
+        color: #ffffff;
+        border-bottom: 1px solid rgba(212, 160, 23, 0.3);
+    }
+
+    .header-glass-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 30px;
+        padding: 60px 40px;
+        text-align: center;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Status Pulse Animation */
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(212, 160, 23, 0.1);
+        border: 1px solid rgba(212, 160, 23, 0.4);
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-size: 12px;
+        color: #d4a017;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+    }
+
+    .status-pulse {
+        width: 8px;
+        height: 8px;
+        background: #d4a017;
+        border-radius: 50%;
+        animation: header-pulse 2s infinite;
+    }
+
+    @keyframes header-pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(212, 160, 23, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
+    }
+
+    /* Typography */
+    .header-glass-container h1 {
+        font-size: clamp(32px, 7vw, 56px);
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: -1px;
+        background: linear-gradient(to bottom, #ffffff, #d4a017);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .header-subtitle {
+        font-size: 20px;
+        color: #8892b0;
+        margin: 20px auto 40px;
+        line-height: 1.5;
+        max-width: 800px;
+    }
+
+    .gold-text {
+        color: #d4a017;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+
+    /* Stat Cards Row */
+    .header-stats-row {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .stat-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(212, 160, 23, 0.2);
+        padding: 20px 35px;
+        border-radius: 20px;
+        min-width: 220px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .stat-card:hover {
+        background: rgba(212, 160, 23, 0.08);
+        border-color: #d4a017;
+        transform: translateY(-5px);
+    }
+
+    .stat-label {
+        display: block;
+        font-size: 12px;
+        color: #8892b0;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+    }
+
+    .stat-value {
+        font-size: 32px;
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .executive-header { padding: 40px 15px; }
+        .header-glass-container { padding: 40px 20px; }
+        .stat-card { width: 100%; min-width: unset; }
+        .mobile-hide { display: none; }
+    }
+</style>
 <div class="table-wrapper">
 <table id="priceTable">
     <tr>
@@ -377,6 +535,24 @@ padding:10px;
     </iframe>
 </div>
 
+<div id="chart4-container">
+    <iframe 
+        src="topproductweight.html" 
+        style="width:98%; height:auto; border:0; overflow:hidden;" 
+        scrolling="no" 
+        onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
+    </iframe>
+</div>
+
+<div id="chart5-container">
+    <iframe 
+        src="Genchart.html" 
+        style="width:98%; height:auto; border:0; overflow:hidden;" 
+        scrolling="no" 
+        onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
+    </iframe>
+</div>
+
 <script>
 // === Products & Weights ===
 const products = [
@@ -565,7 +741,7 @@ let chart = Highcharts.chart('chartContainer', {
         categories: products.map(p => p.name),
         labels: {
             rotation: -45,
-            style: { fontSize: '14px' }
+            style: { fontSize: '13px', fontFamily: 'Times New Roman' }
         }
     },
 
@@ -574,22 +750,22 @@ let chart = Highcharts.chart('chartContainer', {
         startOnTick: true,
         endOnTick: true,
         tickAmount: 6,
-        title: { text: 'Price Index' }
+        title: { text: 'Price Index', style: { fontFamily: 'Times New Roman' , fontSize: '13px'} }
     },
 
   tooltip: {
     shared: true,
     useHTML: true, // Crucial for using custom font sizes
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    borderWidth: 2,
+    backgroundColor: 'transparent gray', // Semi-transparent background for better readability
+    borderWidth: 1,
     borderRadius: 10,
     shadow: true,
     padding: 15,
     style: {
-        fontSize: '22px',      // Global popup text size
-        fontFamily: 'Poppins, sans-serif'
+        fontSize: '13px',      // Global popup text size
+        fontFamily: 'Times New Roman', textColor: 'yellow' // Global popup text color
     },
-    headerFormat: '<div style="font-size: 18px; margin-bottom: 10px; color: #666; border-bottom: 1px solid #ddd; padding-bottom: 5px;">Day {point.key}</div>',
+    headerFormat: '<div style="font-size: 18px; margin-bottom: 10px; color: #666; border-bottom: 1px solid #ddd; padding-bottom: 5px;">{point.date} - {point.key}</div>',
     pointFormat: '<div style="display: flex; justify-content: space-between; align-items: center; min-width: 180px;">' +
                  '<span style="color:{series.color}; font-weight: bold; font-size: 24px;">● {series.name}: </span>' +
                  '<span style="font-weight: 800; font-size: 28px; color: #1207ad; margin-left: 15px;">{point.y:.2f}</span>' +
@@ -616,7 +792,7 @@ let chart = Highcharts.chart('chartContainer', {
             }
         },
         column: {
-            pointWidth: 20   // makes columns wider for phones
+            pointWidth: 18   // makes columns wider for phones
         }
     },
 
@@ -637,7 +813,7 @@ let chart = Highcharts.chart('chartContainer', {
                     labels: { style: { fontSize: '10px' } }
                 },
                 plotOptions: {
-                    column: { pointWidth: 20 } // narrow columns for phones
+                    column: { pointWidth: 16 } // narrow columns for phones
                 }
             }
         },
@@ -653,7 +829,7 @@ let chart = Highcharts.chart('chartContainer', {
                     labels: { style: { fontSize: '20px' } }
                 },
                 plotOptions: {
-                    column: { pointWidth: 20 } // wider columns for desktop
+                    column: { pointWidth: 40 } // wider columns for desktop
                 }
             }
         }
@@ -664,13 +840,20 @@ let chart = Highcharts.chart('chartContainer', {
 function updateChart(month, date){
     const values = priceData[month][date];
     if(!values || values.length !== products.length || values.every(v=>v===0)){
-        alert(`No data for ${month} ${date}`);
+        alert(`No data for${month} ${date}`);
         return;
     }
     document.getElementById('chartContainer').style.display='block';
     chart.update({
         title:{ text:`Price Index - ${month} ${date}th` },
-        series:[{ data: values.map(v => ({ y:v, color: v<=100?'green':v<=140?'orange':'red' })) }]
+        series:[{ 
+    data: values.map((v,i) => ({
+        name: products[i].name,
+        y: v,
+        date: date + " " + month,
+        color: v<=100 ? 'green' : v<=140 ? 'orange' : 'red'
+    }))
+}]
     }, true, true);
     chart.reflow();
 
@@ -731,10 +914,108 @@ table.deleteRow(-1);
 
 </script>
 
-<footer style="text-align: center; padding: 20px; font-size: 22px; color: #faf8f8;" background-color: #000000; margin-top: 40px; margin-bottom: 40px;">
-    Visualization by <a href="mailto:odwardenishnixsion@gmail.com" style="color: #cdfa06; text-decoration: none; font-size: 18px;">Odward Denish Nixsion</a> <br><br>
-    Data Source: <a href="./03_2026CIPI_JANUARY_2026_EXCEL_TABLES.xlsx" target="_blank" 
-    style="color: #ebfc04; text-decoration: none;">CPI 2026 EXCEL TABLE</a>
+<footer class="modern-footer">
+    <div class="footer-glass-content">
+        <!-- Top Section: Data Context -->
+        <div class="footer-main-info">
+            <div class="source-tag">
+                <span class="icon">📊</span>
+                <div>
+                    <strong>Data Source:</strong> Uganda Bureau of Statistics (UBOS)
+                    <p class="sub-text">Overall Construction Input Price Index (Base 2016/17 = 100)</p>
+                </div>
+            </div>
+            
+            <div class="period-box">
+                <span class="label">Analysis Period</span>
+                <span class="value">Jan 2016 – Jan 2017</span>
+            </div>
+        </div>
+
+        <div class="footer-separator"></div>
+
+        <!-- Middle Section: Authorship -->
+        <div class="author-credits">
+            <div class="viz-by">Visualization By: ODWAR DENISH NIXSION</div>
+    
+        </div>
+
+        <!-- Bottom Section: Pulse & Small Print -->
+        <div class="footer-bottom">
+            <div class="live-status">
+                <div class="pulse-icon"></div> Live Analytics System
+            </div>
+            <div class="copyright">&copy; 2026 Research Insight. All rights reserved.</div>
+        </div>
+    </div>
+</footer>
+
+<style>
+.modern-footer {
+    padding: 60px 20px 30px;
+    background: #00040a;
+    font-family: 'times new roman';
+    color: #faf9f9;
+}
+
+.footer-glass-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 160, 23, 0.1);
+    border-radius: 24px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+}
+
+.footer-main-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.source-tag { display: flex; align-items: center; gap: 15px; }
+.source-tag .icon { font-size: 24px; }
+.sub-text { font-size: 13px; color: #8892b0; margin: 4px 0 0; }
+
+.period-box {
+    background: rgba(212, 160, 23, 0.1);
+    padding: 10px 20px;
+    border-radius: 12px;
+    border-left: 3px solid #d4a017;
+}
+
+.period-box .label { display: block; font-size: 13px; text-transform: uppercase; color: #fdf902; letter-spacing: 1px; }
+
+.footer-separator { height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.2), transparent); margin: 30px 0; }
+
+.author-credits { text-align: center; }
+.viz-by { font-size: 16px; color: #f2f3f8; text-transform: uppercase; margin-bottom: 8px; }
+.names { font-size: 18px; font-weight: 600; color: #d4a017; }
+.dot { height: 8px; width: 8px; background: #d4a017; display: inline-block; border-radius: 50%; margin: 0 10px; vertical-align: middle; }
+
+.social-tags { display: flex; justify-content: center; gap: 12px; margin-top: 15px; }
+.tag { font-size: 13px; color: #fff; text-decoration: none; padding: 5px 15px; border-radius: 50px; background: rgba(255,255,255,0.05); transition: 0.3s; }
+.tag:hover { background: #d4a017; color: #0b1c3d; }
+
+.footer-bottom { display: flex; justify-content: space-between; margin-top: 40px; font-size: 12px; color: #8892b0; }
+
+.pulse-icon { width: 10px; height: 10px; background: #fffb02; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 0 rgba(212, 160, 23, 0.4); animation: pulse 2s infinite; }
+
+@keyframes pulse { 
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(212, 160, 23, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
+}
+
+@media (max-width: 768px) {
+    .footer-main-info { flex-direction: column; text-align: center; }
+    .footer-bottom { flex-direction: column; align-items: center; gap: 10px; }
+}
+</style>
+
 
 </body>
 </html>

@@ -44,7 +44,7 @@
     </style>
 </head>
 <body class="overall-index">
-    <h1 class="line-chart-heading" style="text-align: center; font-size: 28px;">Overal Construction Price Index<br>(Days 17–26 for Each Month)</h1>
+    <h1 class="line-chart-heading" style="text-align: center; font-size: 28px; font-family: 'Times New Roman';">Overal Construction Price Index<br>(Days 17–26 for Each Month)</h1>
     
    <!-- my Chart canvas -->
 <div class="chart-container" style="position: relative; height: 350px; width: 100%;">
@@ -54,7 +54,7 @@
 
     <script>
         const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-        const days = ["17","18","19","20","21","22","23","24","25","26"];
+        const days = ["17th","18th","19th","20th","21st","22nd","23rd","24th","25th","26th"];
 
         // Monthly price index data for each day (17-26) of each month. 0 means "no data" and will be fixed to null in the chart to prevent dips.
         const priceIndex = {
@@ -113,11 +113,11 @@
     legend: {
         position: 'bottom',
         labels: { 
-            color: 'white',
+            color: 'white', fontFamily: 'Times New Roman',
             padding: 20,
             font: { 
-                size: 20, // Bigger legend text for Windows
-                weight: 'bold'
+                size: 16, // Bigger legend text for Windows
+                weight: 'bold', fontFamily: 'Times New Roman'
             } 
         }
     },
@@ -127,8 +127,8 @@
         intersect: false,
         backgroundColor: 'rgba(30, 41, 59, 0.95)', 
         titleColor: '#60a5fa', // Blue title for the Day
-        titleFont: { size: 20, weight: 'bold' }, // BIG DAY TITLE
-        bodyFont: { size: 18 }, // BIG INDEX VALUES
+        titleFont: { size: 20, weight: 'bold', fontFamily: 'Times New Roman'}, // BIG DAY TITLE
+        bodyFont: { size: 18, fontFamily: 'Times New Roman'}, // BIG INDEX VALUES
         bodySpacing: 8,        // Space between month values
         padding: 15,           // Padding inside the popup
         cornerRadius: 10,      // Rounded corners for modern look
@@ -142,13 +142,13 @@
 
                 scales: {
                     x: {
-                        title: { display: true, text: 'Days', color: 'white' },
+                        title: { display: true, text: 'Days', color: 'white', fontFamily: 'Times New Roman' },
                         ticks: { color: 'white' },
                         grid: { color: '#334155' }
                     },
                     y: {
                         beginAtZero: false, // Better for price index tracking
-                        title: { display: true, text: 'Price Index', color: 'white' },
+                        title: { display: true, text: 'Price Index', color: 'white', fontFamily: 'Times New Roman' },
                         ticks: { color: 'white' },
                         grid: { color: '#334155' }
                     }

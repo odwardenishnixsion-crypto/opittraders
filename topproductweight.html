@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Data Dashboard</title>
+    <script src="highcharts.js"></script>
+    <style>
+        *,::before,::after { box-sizing: border-box; }
+        body { font-family: 'Times New Roman', serif; background: #0b1c3d; color: white; margin: 0; padding: 20px; font-size: 18px; }
+        .controls { text-align: center; margin-bottom: 30px; }
+        button { padding: 14px 28px; margin: 8px; border-radius: 8px; border: none; cursor: pointer; font-size: 16px; font-family: 'Times New Roman', serif; background: #17a673; color: white; transition: 0.3s; }
+        button:hover { background: #2e59d9; }
+        
+        .top-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .chart-box {width: 100%; background: #141d2b; padding: 25px; border-radius: 15px; box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+        #zigzagChart { width: 100%; height: 500px; background: #141d2b; border-radius: 15px; padding: 25px; margin-top: 20px; }
+/* Responsive Grid: Changes to 1 column on mobile, removes horizontal scroll */
+
+
+/* Media Query for very small devices */
+@media (max-width: 400px) {
+    .chart-box { padding: 10px; }
+    button { width: 100%; margin: 5px 0; }
+}
+
+
+    </style>
+</head>
+<body>
+
+<h1 style="text-align:center; font-size: 30px; font-family: 'Times New Roman';">Construction Input Price Index 2016/17 Rank by Weights</h1>
+
+<div class="controls">
+    <button onclick="updateData('asc')">Sort by: Lowest Weight</button>
+    <button onclick="updateData('desc')">Sort by: Highest Weight</button>
+    <button onclick="updateData('reset')" style="background: #a61717;">Reset View</button>
+</div>
+
+<div class="top-row">
+    <div class="chart-box" id="barChart"></div>
+    <div class="chart-box" id="donutChart"></div>
+</div>
+
+<div id="zigzagChart"></div>
+
+<script>
+    const originalProducts = [
+        {name:"Aggregate", weight:30.4496}, {name:"Cement", weight:105.7605}, {name:"Ceramics", weight:37.6980},
+        {name:"Clay Bricks", weight:24.0773}, {name:"Concrete", weight:12.6706}, {name:"Diesel", weight:86.2827},
+        {name:"Eucalyptus", weight:2.4599}, {name:"Steel Bars", weight:25.6560}, {name:"Lime", weight:3.8459},
+        {name:"Nails", weight:30.4726}, {name:"Paints", weight:45.5466}, {name:"Pipes", weight:13.9662},
+        {name:"Sand", weight:15.9509}, {name:"Sheet Steel", weight:9.0705}, {name:"Timber", weight:22.7874}
+    ];
+
+    function createCharts(data) {
+        // Bar Chart
+        Highcharts.chart('barChart', {
+            chart: { type: 'bar', backgroundColor: 'transparent' },
+            title: { text: 'Product Weights', style: { color: 'white', fontSize: '24px', fontFamily: 'Times New Roman'} },
+            xAxis: { categories: data.map(p => p.name), labels: { style: { color: 'white', fontSize: '15px' } } },
+            series: [{ name: 'Weight', data: data.map(p => p.weight), color: '#7cb5ec' }]
+        });
+
+        // Donut Chart
+        Highcharts.chart('donutChart', {
+            chart: { type: 'pie', backgroundColor: 'transparent' },
+            title: { text: 'Top 5 Concentration', style: { color: 'white', fontSize: '24px', fontFamily: 'Times New Roman' } },
+            plotOptions: { pie: { innerSize: '60%', dataLabels: { style: { fontSize: '15px', fontFamily: 'Times New Roman' } } } },
+            series: [{ data: data.slice(0, 5).map(p => ({ name: p.name, y: p.weight })) }]
+        });
+
+        // Zigzag Line Chart
+        Highcharts.chart('zigzagChart', {
+            chart: { type: 'line', backgroundColor: 'transparent' },
+            title: { text: 'General Weight Trend across Materials', style: { color: 'white', fontSize: '24px', fontFamily: 'Times New Roman' } },
+            xAxis: { categories: data.map(p => p.name), labels: { style: { color: 'white', fontSize: '15px', fontFamily: 'Times New Roman' } } },
+            series: [{ name: 'Weight Value', data: data.map(p => p.weight), color: '#f7a35c', lineWidth: 5, marker: { radius: 6 } }]
+        });
+    }
+
+    function updateData(action) {
+        let sorted;
+        if (action === 'reset') {
+            sorted = [...originalProducts];
+        } else {
+            sorted = [...originalProducts].sort((a, b) => action === 'asc' ? a.weight - b.weight : b.weight - a.weight);
+        }
+        createCharts(sorted);
+    }
+
+    createCharts(originalProducts);
+</script>
+</body>
+</html>
