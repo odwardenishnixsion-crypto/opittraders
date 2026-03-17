@@ -1,1021 +1,285 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="https://fonts.googleapis.com/css2?family=poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Construction Input Price Index</title>
-    <script src="highcharts.js"></script>
-    <style>
+    <title>opit traders farmers cooperative society limited omoro district</title>
+    <link rel="stylesheet" href="./stylesheet.css" />
 
-       *, *::before, *::after {
-                    box-sizing: border-box;
-                    margin: 0;
-                    padding: 0;
-                            }
-        
-        body {background-image: url("background.jpg"); background-size: cover; background-attachment: fixed;
-                    background-position: center;background-repeat: no-repeat; height: 100vh; margin: 0;
-                    font-family: Arial, sans-serif; text-align:center; color:white; width: 100%;}
-                    h2 {font-size: 18px; margin-top:20px; color: rgb(247, 245, 247); }
-                    .table-wrapper{
-                    width:100%;
-                    overflow-x:auto;
-                    -webkit-overflow-scrolling: touch;
-                        }
-        #priceTable {margin-left: 10px; margin-right: 10px; width:100%; border-collapse: separate; max-width: 100vh;
-                    border-spacing: 12px; margin:20px auto; background:rgb(1, 7, 70); color:black;
-                    border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); font-size: 20px; }
-                    th, td { border:0.5px solid #9af7db; padding:8px 12px; cursor:pointer; text-align: center; font-size: 18px; }
-                    th { background:#ddd; font-size: 29px; font-weight: bold; font-family: 'Times New Roman';}
-
-        td{animation: pulseZoom 3s infinite ease-in-out; font-size: 28px; font-family: 'Times New Roman';
-                    color: white; padding: 12px 25px; text-align: center; font-weight: 600; border-radius: 8px; cursor: pointer;
-                    transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0, 0.2); user-select: none;}
-        td:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); 
-                    background: linear-gradient(135deg, #2e59d9, #17a673);}
-        td:active{transform: scale(0.95);}
-
-
-                                /* Sticky header row (days) */
-        #priceTable tr:first-child th {
-                    position: sticky;
-                    top: 0;
-                    background-color: rgb(230, 231, 223);
-                    z-index: 3; /* above everything else */
-                            }
-
-                            /* Sticky first column (months) */
-                            #priceTable th:first-child,
-                            #priceTable td:first-child {
-                                position: sticky;
-                                left: 0;
-                                background-color: rgb(248, 248, 243);
-                                z-index: 2; /* below header row but above other cells */
-                            }
-
-                            /* Optional: corner cell (top-left) */
-                            #priceTable tr:first-child th:first-child {
-                                z-index: 4; /* top-left corner above everything */
-                            }
-
-        #chartContainer { width:100%; align-content: center; height:60vh;
-                        min-height:350px; margin:0 auto;
-                        display:none; background:white; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
-    
-            .infor{color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px; text-align: center;
-                    background-color: darkblue ; padding: 10px; border-radius: 15px;
-                    margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 0;}
-
-        @keyframes pulseZoom{
-            0%{transform: scale(1);}
-            50%{transform: scale(1.08);}
-            100%{transform: scale(1);}
-        }
-        td:hover{transform: scale(1.1); box-shadow: 0 6px 12px rgba(0, 0, 0, 0, 0.3);}
-
-        iframe {width: 100%; margin-bottom: 5px; margin-top: 5px; border: none; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2);}
-       /* Chart 3 container */
-#chart3-container {
-    width: 95%;
-    margin: 20px auto;
-    margin-bottom: 0;
-    margin-top: 0;
-}
-
-/* Chart 3 iframe */
-#chart3-container iframe {
-    width: 100%;
-    min-height: auto;
-    max-height: 1200px;      /* prevents excessive stretching on desktop */
-    border: none;
-    margin-bottom: 0;
-    margin-top: 0;
-}
-
-/* Make iframe containers responsive */
-#chart2-container,
-#chart3-container {
-    width:95%;
-    margin:20px auto;
-}
-
-#chart2-container iframe
- {
-    width:100%;
-    height:60vh;
-    min-height:350px;
-    border:none;
-}
-
-#chart3-container iframe {
-    width:100%;
-    height:800px;
-}
-
-/* Optional: adjust height for smaller screens */
-@media screen and (max-width: 600px) {
-    #chart2-container iframe,
-    #chart3-container iframe {
-        min-height: 300px;   /* Slightly smaller for phones */
-    }
-}
-
-
-/* Responsive adjustment for larger screens */
-@media screen and (min-width: 1024px) {
-    #chartContainer {
-        height: 70vh;          /* taller chart on large screens */
-        min-height: 500px;
-    }
-}
-
-@media screen and (max-width:600px){
-
-#chartContainer{
-height:420px;
-}
-
-th{
-font-size:18px;
-}
-
-td{
-font-size:18px;
-padding:10px;
-}
-
-}
-
-
-/* First chart container */
-#chartContainer {
-    width: 95%;           /* almost full width */
-    max-width: auto;    /* prevent stretching too much on desktop */
-    height: 600px;        /* larger chart on desktop */
-    margin: 20px auto;    /* center horizontally */
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-}
-
-/* Mobile adjustments */
-@media screen and (max-width: 600px) {
-    #chartContainer {
-        height: 500px;    /* larger chart for phones */
-    }
-}
-
-
-    </style>
-</head>
-<body>
-
-
-<header class="executive-header">
-    <div class="header-glass-container">
-        <div class="status-badge">
-            <span class="status-pulse"></span>
-            Live Market Analytics System
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
+  <body>
+    <div class="header">
+      <div class="navbar">
+        <div class="nav-logo">
+          <h1>OPIT</h1>
+        </div>
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
         </div>
 
-        <h1>Construction Input Price Index (CIPI)</h1>
-        <p class="header-subtitle">
-            Strategic Weight Analysis & Material Ranking Profile <br>
-            <span class="gold-text">Base Period: 2016/17 Fiscal Year</span>
-        </p>
-
-        <div class="header-stats-row">
-            <div class="stat-card">
-                <span class="stat-label">Aggregated Index Weight</span>
-                <strong class="stat-value" id="topTotalWeight">0.00</strong>
-            </div>
-            <div class="stat-card">
-                <span class="stat-label">Material Classifications</span>
-                <strong class="stat-value">18 Units</strong>
-            </div>
-            <div class="stat-card mobile-hide">
-                <span class="stat-label">Data Authority</span>
-                <strong class="stat-value" style="font-size: 18px;">UBOS Uganda</strong>
-            </div>
-        </div>
+        <ul class="nav-menu">
+          <li><a href="./index.html">ABOUT</a></li>
+          <li><a href="./loan.html">LOAN</a></li>
+          <li><a href="./project.html">PROJECT</a></li>
+          <li><a href="./opit Traders.JPG">HOME</a></li>
+        </ul>
+      </div>
     </div>
-</header>
 
-<style>
-    /* --- HEADER SPECIFIC STYLING --- */
-    .executive-header {
-        padding: 40px 10px 30px;
-        background: radial-gradient(circle at top, #0b1c3d 0%, #00040a 100%);
-        font-family: 'Times New Roman', Times, serif;
-        color: #ffffff;
-        border-bottom: 1px solid #fbe6024d;
-    }
-
-    .header-glass-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        background: rgba(255, 255, 255, 0.02);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 30px;
-        padding: 60px 40px;
-        text-align: center;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-    }
-
-    /* Status Pulse Animation */
-    .status-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background: rgba(212, 160, 23, 0.1);
-        border: 1px solid rgba(212, 160, 23, 0.4);
-        padding: 8px 20px;
-        border-radius: 50px;
-        font-size: 12px;
-        color: #79d417;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin-bottom: 30px;
-    }
-
-    .status-pulse {
-        width: 8px;
-        height: 8px;
-        background: #d4a017;
-        border-radius: 50%;
-        animation: header-pulse 2s infinite;
-    }
-
-    @keyframes header-pulse {
-        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.7); }
-        70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(212, 160, 23, 0); }
-        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
-    }
-
-    /* Typography */
-    .header-glass-container h1 {
-        font-size: clamp(32px, 7vw, 56px);
-        margin: 0;
-        font-weight: 700;
-        letter-spacing: -1px;
-        background: linear-gradient(to bottom, #ffffff, #d4a017);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .header-subtitle {
-        font-size: 20px;
-        color: #8892b0;
-        margin: 20px auto 40px;
-        line-height: 1.5;
-        max-width: 800px;
-    }
-
-    .gold-text {
-        color: #b8d417;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 16px;
-        letter-spacing: 1px;
-    }
-
-    /* Stat Cards Row */
-    .header-stats-row {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
-    .stat-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(212, 160, 23, 0.2);
-        padding: 20px 35px;
-        border-radius: 20px;
-        min-width: 220px;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .stat-card:hover {
-        background: rgba(212, 160, 23, 0.08);
-        border-color: #d4a017;
-        transform: translateY(-5px);
-    }
-
-    .stat-label {
-        display: block;
-        font-size: 12px;
-        color: #8892b0;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-        letter-spacing: 1px;
-    }
-
-    .stat-value {
-        font-size: 32px;
-        color: #ffffff;
-        font-weight: bold;
-    }
-
-    /* Mobile Responsiveness */
-    @media (max-width: 768px) {
-        .executive-header { padding: 40px 15px; }
-        .header-glass-container { padding: 40px 20px; }
-        .stat-card { width: 100%; min-width: unset; }
-        .mobile-hide { display: none; }
-    }
-</style>
-<div class="table-wrapper">
-<table id="priceTable">
-    <tr>
-        <th>MONTHS</th>
-        <th>17th</th>
-        <th>18th</th>
-        <th>19th</th>
-        <th>20th</th>
-        <th>21st</th>
-        <th>22nd</th>
-        <th>23rd</th>
-        <th>24th</th>
-        <th>25th</th>
-        <th>26th</th>
-    </tr>
-    <tr>
-    <th>JAN</th>
-    <td onclick="updateChart('JAN','17')">Check</td>
-    <td onclick="updateChart('JAN','18')">Check</td>
-    <td onclick="updateChart('JAN','19')">Check</td>
-    <td onclick="updateChart('JAN','20')">Check</td>
-    <td onclick="updateChart('JAN','21')">Check</td>
-    <td onclick="updateChart('JAN','22')">Check</td>
-    <td onclick="updateChart('JAN','23')">Check</td>
-    <td onclick="updateChart('JAN','24')">Check</td>
-    <td onclick="updateChart('JAN','25')">Check</td>
-    <td onclick="updateChart('JAN','26')">Check</td>
-</tr>
-<tr>
-    <th>FEB</th>
-    <td onclick="updateChart('FEB','17')">Check</td>
-    <td onclick="updateChart('FEB','18')">Check</td>
-    <td onclick="updateChart('FEB','19')">Check</td>
-    <td onclick="updateChart('FEB','20')">Check</td>
-    <td onclick="updateChart('FEB','21')">Check</td>
-    <td onclick="updateChart('FEB','22')">Check</td>
-    <td onclick="updateChart('FEB','23')">Check</td>
-    <td onclick="updateChart('FEB','24')">Check</td>
-    <td onclick="updateChart('FEB','25')">Check</td>
-    <td onclick="updateChart('FEB','26')">Check</td>
-</tr>
-<tr>
-    <th>MAR</th>
-    <td onclick="updateChart('MAR','17')">Check</td>
-    <td onclick="updateChart('MAR','18')">Check</td>
-    <td onclick="updateChart('MAR','19')">Check</td>
-    <td onclick="updateChart('MAR','20')">Check</td>
-    <td onclick="updateChart('MAR','21')">Check</td>
-    <td onclick="updateChart('MAR','22')">Check</td>
-    <td onclick="updateChart('MAR','23')">Check</td>
-    <td onclick="updateChart('MAR','24')">Check</td>
-    <td onclick="updateChart('MAR','25')">Check</td>
-    <td onclick="updateChart('MAR','26')">Check</td>
-</tr>
-
-<tr>
-    <th>APR</th>
-    <td onclick="updateChart('APR','17')">Check</td>
-    <td onclick="updateChart('APR','18')">Check</td>
-    <td onclick="updateChart('APR','19')">Check</td>
-    <td onclick="updateChart('APR','20')">Check</td>
-    <td onclick="updateChart('APR','21')">Check</td>
-    <td onclick="updateChart('APR','22')">Check</td>
-    <td onclick="updateChart('APR','23')">Check</td>
-    <td onclick="updateChart('APR','24')">Check</td>
-    <td onclick="updateChart('APR','25')">Check</td>
-    <td onclick="updateChart('APR','26')">Check</td>
-</tr>
-
-<tr>
-    <th>MAY</th>
-    <td onclick="updateChart('MAY','17')">Check</td>
-    <td onclick="updateChart('MAY','18')">Check</td>
-    <td onclick="updateChart('MAY','19')">Check</td>
-    <td onclick="updateChart('MAY','20')">Check</td>
-    <td onclick="updateChart('MAY','21')">Check</td>
-    <td onclick="updateChart('MAY','22')">Check</td>
-    <td onclick="updateChart('MAY','23')">Check</td>
-    <td onclick="updateChart('MAY','24')">Check</td>
-    <td onclick="updateChart('MAY','25')">Check</td>
-    <td onclick="updateChart('MAY','26')">Check</td>
-</tr>
-
-<tr>
-    <th>JUN</th>
-    <td onclick="updateChart('JUN','17')">Check</td>
-    <td onclick="updateChart('JUN','18')">Check</td>
-    <td onclick="updateChart('JUN','19')">Check</td>
-    <td onclick="updateChart('JUN','20')">Check</td>
-    <td onclick="updateChart('JUN','21')">Check</td>
-    <td onclick="updateChart('JUN','22')">Check</td>
-    <td onclick="updateChart('JUN','23')">Check</td>
-    <td onclick="updateChart('JUN','24')">Check</td>
-    <td onclick="updateChart('JUN','25')">Check</td>
-    <td onclick="updateChart('JUN','26')">Check</td>
-</tr>
-
-<tr>
-    <th>JUL</th>
-    <td onclick="updateChart('JUL','17')">Check</td>
-    <td onclick="updateChart('JUL','18')">Check</td>
-    <td onclick="updateChart('JUL','19')">Check</td>
-    <td onclick="updateChart('JUL','20')">Check</td>
-    <td onclick="updateChart('JUL','21')">Check</td>
-    <td onclick="updateChart('JUL','22')">Check</td>
-    <td onclick="updateChart('JUL','23')">Check</td>
-    <td onclick="updateChart('JUL','24')">Check</td>
-    <td onclick="updateChart('JUL','25')">Check</td>
-    <td onclick="updateChart('JUL','26')">Check</td>
-</tr>
-
-<tr>
-    <th>AUG</th>
-    <td onclick="updateChart('AUG','17')">Check</td>
-    <td onclick="updateChart('AUG','18')">Check</td>
-    <td onclick="updateChart('AUG','19')">Check</td>
-    <td onclick="updateChart('AUG','20')">Check</td>
-    <td onclick="updateChart('AUG','21')">Check</td>
-    <td onclick="updateChart('AUG','22')">Check</td>
-    <td onclick="updateChart('AUG','23')">Check</td>
-    <td onclick="updateChart('AUG','24')">Check</td>
-    <td onclick="updateChart('AUG','25')">Check</td>
-    <td onclick="updateChart('AUG','26')">Check</td>
-</tr>
-
-<tr>
-    <th>SEPT</th>
-    <td onclick="updateChart('SEPT','17')">Check</td>
-    <td onclick="updateChart('SEPT','18')">Check</td>
-    <td onclick="updateChart('SEPT','19')">Check</td>
-    <td onclick="updateChart('SEPT','20')">Check</td>
-    <td onclick="updateChart('SEPT','21')">Check</td>
-    <td onclick="updateChart('SEPT','22')">Check</td>
-    <td onclick="updateChart('SEPT','23')">Check</td>
-    <td onclick="updateChart('SEPT','24')">Check</td>
-    <td onclick="updateChart('SEPT','25')">Check</td>
-    <td onclick="updateChart('SEPT','26')">Check</td>
-</tr>
-
-<tr>
-    <th>OCT</th>
-    <td onclick="updateChart('OCT','17')">Check</td>
-    <td onclick="updateChart('OCT','18')">Check</td>
-    <td onclick="updateChart('OCT','19')">Check</td>
-    <td onclick="updateChart('OCT','20')">Check</td>
-    <td onclick="updateChart('OCT','21')">Check</td>
-    <td onclick="updateChart('OCT','22')">Check</td>
-    <td onclick="updateChart('OCT','23')">Check</td>
-    <td onclick="updateChart('OCT','24')">Check</td>
-    <td onclick="updateChart('OCT','25')">Check</td>
-    <td onclick="updateChart('OCT','26')">Check</td>
-</tr>
-
-<tr>
-    <th>NOV</th>
-    <td onclick="updateChart('NOV','17')">Check</td>
-    <td onclick="updateChart('NOV','18')">Check</td>
-    <td onclick="updateChart('NOV','19')">Check</td>
-    <td onclick="updateChart('NOV','20')">Check</td>
-    <td onclick="updateChart('NOV','21')">Check</td>
-    <td onclick="updateChart('NOV','22')">Check</td>
-    <td onclick="updateChart('NOV','23')">Check</td>
-    <td onclick="updateChart('NOV','24')">Check</td>
-    <td onclick="updateChart('NOV','25')">Check</td>
-    <td onclick="updateChart('NOV','26')">Check</td>
-</tr>
-
-<tr>
-    <th>DEC</th>
-    <td onclick="updateChart('DEC','17')">Check</td>
-    <td onclick="updateChart('DEC','18')">Check</td>
-    <td onclick="updateChart('DEC','19')">Check</td>
-    <td onclick="updateChart('DEC','20')">Check</td>
-    <td onclick="updateChart('DEC','21')">Check</td>
-    <td onclick="updateChart('DEC','22')">Check</td>
-    <td onclick="updateChart('DEC','23')">Check</td>
-    <td onclick="updateChart('DEC','24')">Check</td>
-    <td onclick="updateChart('DEC','25')">Check</td>
-    <td onclick="updateChart('DEC','26')">Check</td>
-</tr>
-
-</table>
-</div>
-
-<!-- first Chart div -->
-<div id="chartContainer"></div>
-
-<!-- Second Chart div -->
-<div id="chart2-container">
-    <iframe 
-        src="chart2.html" 
-        style="width:98%; height:500px; border:0; overflow:hidden;" 
-        scrolling="no" 
-        onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
-    </iframe>
-</div>
-
-<!-- Third Chart div -->
-<div id="chart3-container">
-    <iframe 
-        src="lineoverall.html" 
-        style="width:98%; height:500px; border:0; overflow:hidden;" 
-        scrolling="no" 
-        onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
-    </iframe>
-</div>
-
-<div id="chart4-container">
-    <iframe 
-        src="topproductweight.html" 
-        style="width:98%; height:auto; border:0; overflow:hidden;" 
-        scrolling="no" 
-        onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
-    </iframe>
-</div>
-
-<div id="chart5-container">
-    <iframe 
-        src="Genchart.html" 
-        style="width:98%; height:auto; border:0; overflow:hidden;" 
-        scrolling="no" 
-        onload="this.style.height=this.contentWindow.document.body.scrollHeight + 'px';">
-    </iframe>
-</div>
-
-<script>
-// === Products & Weights ===
-const products = [
-    {name:"Aggregate", weight:30.4496},
-    {name:"Cement", weight:105.7605},
-    {name:"Ceramics Wall & Floor Tiles", weight:37.6980},
-    {name:"Clay Bricks & Tiles", weight:24.0773},
-    {name:"Concrete Bricks, Blocks & Slabs", weight:12.6706},
-    {name:"Diesel", weight:86.2827},
-    {name:"Eucalyptus Props", weight:2.4599},
-    {name:"High Tensile Steel Bars", weight:25.6560},
-    {name:"Lime", weight:3.8459},
-    {name:"Nails, Bolts & Screws", weight:30.4726},
-    {name:"Paints & Varnishes", weight:45.5466},
-    {name:"Plastic Pipes & Fittings", weight:13.9662},
-    {name:"Sand", weight:15.9509},
-    {name:"Sheet Steel & Roofing Sheets", weight:9.0705},
-    {name:"Timber (Coniferous >6mm)", weight:22.7874}
-];
-
-// === Price data
-const priceData = {
-     JAN:{
-        17:[96.76,96.48,98.75,98.67,100.00,103.70,102.50,103.04,96.48,101.40,100.77,100.00,101.18,102.48,102.57],
-        18:[98.88,94.18,97.13,97.22,98.43,109.74,101.32,110.91,94.81,103.51,100.60,100.17,101.18,109.86,101.12],
-        19:[110.66,94.30,110.96,109.47,95.36,133.45,101.33,119.28,94.30,106.08,107.24,100.69,114.46,117.02,100.81],
-        20:[115.92,91.50,124.79,120.47,96.38,129.87,110.76,124.80,97.42,106.28,109.39,97.43,120.92,118.61,106.99],
-        21:[118.55,91.63,133.44,127.59,99.87,123.26,107.17,130.71,100.74,113.63,109.96,98.88,125.47,121.83,107.24],
-        22:[121.83,94.13,150.78,129.99,100.25,146.84,115.38,134.58,104.32,118.42,115.09,105.81,128.15,134.41,107.95],
-        23:[136.87,108.21,153.72,193.54,108.56,182.33,150.26,159.28,115.41,123.30,120.84,109.99,143.64,135.44,116.87],
-        24:[141.95,108.43,158.95,146.44,107.64,188.28,147.21,156.94,115.98,121.21,123.48,105.25,143.81,129.50,118.44],
-        25:[139.22,108.52,158.72,145.50,108.37,178.63,156.23,161.74,108.97,130.41,123.49,119.94,147.31,140.75,121.26],
-        26:[139.97,107.43,156.94,147.72,111.85,179.31,155.45,160.06,110.68,128.95,124.02,120.12,146.97,136.66,120.74]
-    },
-    FEB:{
-        17:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        18:[98.88,98.00,97.13,97.22,98.43,114.79,99.57,113.40,98.00,104.72,101.31,100.17,101.18,112.02,99.26],
-        19:[111.14,94.18,111.78,109.69,95.15,133.71,101.33,119.44,94.30,106.24,107.60,100.24,114.77,118.28,99.62],
-        20:[115.57,91.23,124.79,121.20,96.43,130.22,110.76,125.44,97.42,106.49,109.83,97.44,121.29,118.78,105.90],
-        21:[119.19,91.90,133.44,127.57,99.86,123.71,110.07,131.91,101.45,114.19,109.95,99.55,125.07,122.96,106.55],
-        22:[123.91,94.24,148.19,131.70,100.50,148.35,115.38,134.60,104.32,118.77,115.91,104.27,129.10,135.28,107.55],
-        23:[137.63,110.10,153.72,139.72,108.27,181.62,154.26,157.85,115.41,121.86,123.87,109.87,145.28,134.81,116.68],
-        24:[143.15,108.64,158.95,146.51,107.67,187.83,147.21,157.02,115.98,125.22,123.49,105.82,145.83,130.61,118.23],
-        25:[139.22,108.31,158.72,145.93,108.36,179.59,156.63,161.31,110.55,130.29,124.41,119.94,147.36,140.77,119.45],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-    MAR:{
-        17:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        18:[98.88,102.18,97.13,97.22,98.43,118.34,99.57,114.60,102.18,106.80,100.96,100.17,101.18,112.95,99.26],
-        19:[111.28,94.62,113.51,110.10,95.22,133.03,101.33,119.60,94.83,106.30,107.02,99.83,114.36,118.49,99.82],
-        20:[116.00,91.35,124.79,121.58,96.44,129.47,109.76,127.10,100.13,108.05,110.38,97.54,121.82,119.57,105.03],
-        21:[119.65,91.72,134.10,127.28,99.63,124.54,110.07,131.76,101.05,116.46,109.70,99.55,124.68,124.05,107.43],
-        22:[125.02,97.02,149.36,132.06,102.16,155.12,117.16,140.24,105.78,119.27,117.09,105.15,129.59,142.34,108.65],
-        23:[138.36,109.58,155.76,142.41,107.67,179.60,151.02,156.35,116.37,121.80,122.68,110.23,145.31,133.29,117.38],
-        24:[141.81,108.68,158.95,146.53,107.93,185.85,147.21,159.12,107.23,127.50,122.85,105.82,145.08,136.58,119.30],
-        25:[139.03,108.64,158.72,147.95,111.87,181.55,158.66,160.47,112.00,130.20,123.38,120.67,147.47,140.71,119.45],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-
-    APR:{
-        17:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        18:[98.88,119.72,97.13,97.22,99.49,124.35,99.69,115.12,119.72,108.19,107.74,100.17,101.18,114.69,99.26],
-        19:[111.20,94.28,112.23,111.14,95.35,133.46,101.54,119.98,95.14,106.23,107.25,99.83,114.66,117.39,101.98],
-        20:[116.58,91.14,125.11,122.79,96.50,128.41,109.76,127.69,97.42,108.19,110.42,97.79,121.76,119.89,104.62],
-        21:[119.70,92.03,135.64,127.37,99.59,125.54,109.07,132.30,101.05,115.87,111.01,99.49,124.72,125.11,107.51],
-        22:[129.34,103.57,151.14,132.87,102.68,168.36,121.23,146.34,106.40,123.22,117.63,105.15,139.84,147.73,112.87],
-        23:[138.41,108.61,158.95,142.42,107.45,177.80,148.40,156.50,115.83,120.26,124.01,109.16,145.51,132.85,117.38],
-        24:[141.16,110.49,158.95,146.45,108.28,185.91,147.21,158.46,105.80,131.34,118.68,104.95,144.86,136.07,119.30],
-        25:[139.60,108.98,158.72,147.96,111.87,182.06,156.87,160.79,111.39,130.01,123.44,120.67,148.72,141.06,121.08],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-
-    MAY:{
-        17:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        18:[98.88,105.53,98.62,98.55,98.43,126.82,99.69,119.96,105.53,109.77,107.56,100.17,101.18,117.80,99.26],
-        19:[111.30,93.91,116.63,111.62,95.37,133.25,101.54,119.85,93.86,105.98,107.35,100.07,114.77,118.62,103.63],
-        20:[116.84,91.47,125.11,124.36,96.58,125.93,109.76,128.45,97.42,111.06,110.35,97.83,121.83,119.85,104.19],
-        21:[119.70,92.20,134.83,127.37,99.59,125.90,109.93,132.38,101.05,114.29,111.71,99.99,124.67,128.63,107.51],
-        22:[130.15,106.53,151.14,133.62,103.12,172.90,123.76,147.59,106.90,123.41,118.90,105.15,140.32,145.45,112.87],
-        23:[138.15,109.12,158.95,142.40,107.44,176.74,148.40,156.40,115.83,121.67,123.84,109.16,145.42,132.39,117.90],
-        24:[141.53,112.35,158.95,146.42,107.26,184.53,148.55,158.67,105.80,131.15,120.42,104.95,144.86,135.77,120.12],
-        25:[139.66,108.95,158.72,147.94,111.87,182.69,156.87,160.85,111.39,130.34,122.78,119.92,148.39,140.12,121.63],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-
-    JUN:{
-        17:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        18:[98.88,101.88,98.62,98.55,98.43,130.63,101.16,120.16,101.88,109.29,108.60,100.17,101.18,117.94,100.81],
-        19:[112.02,93.47,116.63,112.45,95.51,133.66,101.64,119.15,93.77,107.85,107.41,99.78,117.11,119.53,103.69],
-        20:[116.17,91.28,125.11,124.71,96.83,126.29,109.76,128.37,100.13,112.31,110.80,97.72,122.04,119.78,103.44],
-        21:[119.70,92.37,134.83,127.40,99.42,126.16,108.94,131.90,101.31,112.32,112.30,99.81,124.47,129.23,107.30],
-        22:[130.41,107.33,153.10,132.38,105.02,182.89,128.41,150.10,107.78,122.25,119.29,105.15,140.21,140.63,113.00],
-        23:[138.79,108.44,158.95,142.34,107.41,175.64,147.71,155.20,115.83,120.92,124.08,107.34,142.93,130.89,117.96],
-        24:[141.55,112.32,158.72,146.07,107.79,183.16,149.20,158.57,105.80,130.95,120.09,119.27,144.57,135.10,120.18],
-        25:[139.04,108.93,158.72,147.67,111.85,182.34,156.87,160.67,111.39,130.85,123.14,120.59,148.25,139.75,121.44],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-
-    JUL:{
-        17:[96.76,96.48,98.75,98.67,100.00,103.70,102.50,103.04,96.48,101.40,100.75,100.00,101.18,102.48,102.57],
-        18:[110.66,101.55,98.62,98.55,98.43,134.61,101.33,119.89,101.55,107.64,108.43,100.69,114.46,118.66,100.81],
-        19:[112.10,92.90,117.97,112.98,95.62,133.59,101.74,119.97,94.77,107.38,108.11,99.41,117.70,119.68,103.05],
-        20:[116.21,92.09,125.51,126.45,97.90,127.33,113.54,128.62,100.92,113.65,110.08,96.06,123.09,120.33,103.99],
-        21:[122.44,92.08,139.77,128.63,99.42,134.87,112.13,132.66,100.07,112.14,112.43,103.68,122.82,131.16,107.51],
-        22:[130.80,106.06,153.27,132.03,105.35,192.06,128.41,150.38,108.20,123.69,120.01,105.15,140.16,140.29,113.89],
-        23:[141.35,108.22,158.95,144.46,106.75,173.83,147.21,154.31,113.22,121.06,125.17,106.62,142.82,129.51,117.64],
-        24:[140.56,112.19,158.72,145.37,107.26,180.64,151.17,161.81,103.02,130.86,120.47,118.90,144.60,135.17,119.56],
-        25:[138.79,109.05,158.72,147.64,112.09,182.19,156.87,159.59,111.39,131.19,122.50,120.59,147.87,139.12,121.44],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-
-    AUG:{
-        17:[96.76,96.48,98.75,98.67,100.00,103.70,102.50,103.04,96.48,101.40,100.75,100.00,101.18,102.48,102.57],
-        18:[110.66,101.55,98.62,98.55,98.43,134.61,101.33,119.89,101.55,107.64,108.43,100.69,114.46,118.66,100.81],
-        19:[112.10,92.90,117.97,112.98,95.62,133.59,101.74,119.97,94.77,107.38,108.11,99.41,117.70,119.68,103.05],
-        20:[116.21,92.09,125.51,126.45,97.90,127.33,113.54,128.62,100.92,113.65,110.08,96.06,123.09,120.33,103.99],
-        21:[122.44,92.08,139.77,128.63,99.42,134.87,112.13,132.66,100.07,112.14,112.43,103.68,122.82,131.16,107.51],
-        22:[130.80,106.06,153.27,132.03,105.35,192.06,128.41,150.38,108.20,123.69,120.01,105.15,140.16,140.29,113.89],
-        23:[141.35,108.22,158.95,144.46,106.75,173.83,147.21,154.31,113.22,121.06,125.17,106.62,142.82,129.51,117.64],
-        24:[140.56,112.19,158.72,145.37,107.26,180.64,151.17,161.81,103.02,130.86,120.47,118.90,144.60,135.17,119.56],
-        25:[138.79,109.05,158.72,147.64,112.09,182.19,156.87,159.59,111.39,131.19,122.50,120.59,147.87,139.12,121.44],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-
-    SEPT:{
-        17:[94.67,94.30,94.30,98.67,99.66,104.61,102.33,102.89,94.30,101.39,99.98,100.00,98.28,105.47,102.57],
-        18:[110.66,95.54,98.62,98.55,98.43,135.79,101.33,120.95,95.54,107.57,108.19,100.69,114.46,117.33,100.81],
-        19:[113.48,92.87,122.23,117.93,95.70,132.02,103.60,120.68,96.74,108.37,108.52,100.59,118.72,119.06,105.51],
-        20:[116.72,93.33,132.42,126.76,98.52,127.12,112.65,129.72,100.60,114.47,109.71,96.11,123.31,121.55,105.08],
-        21:[122.23,92.99,139.77,128.70,99.54,136.37,112.13,132.85,101.25,112.71,114.06,104.07,123.72,133.09,108.49],
-        22:[129.69,105.50,153.27,132.89,106.48,195.81,129.58,150.90,109.64,122.79,121.34,105.15,145.51,140.26,114.80],
-        23:[140.51,108.19,158.95,145.19,107.10,182.96,147.21,153.67,117.51,120.92,124.11,106.48,142.69,128.95,117.64],
-        24:[139.53,109.35,158.72,145.52,107.61,179.94,151.17,161.10,103.02,130.24,123.45,119.59,145.24,141.58,120.63],
-        25:[139.13,108.21,158.57,147.77,112.05,181.96,158.56,159.42,111.39,130.83,122.47,119.67,148.59,138.94,121.60],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-
-     OCT:{
-        17:[98.88,95.00,97.13,97.22,99.13,105.24,102.33,104.71,95.00,100.84,100.75,100.00,101.18,107.68,102.57],
-        18:[110.66,94.96,100.50,100.23,95.36,136.41,101.33,121.18,94.96,107.53,108.10,100.69,114.46,117.19,100.81],
-        19:[114.63,92.45,123.68,118.42,95.70,131.58,104.03,121.35,97.76,107.92,108.36,100.60,119.82,119.12,107.64],
-        20:[116.72,93.41,132.42,126.76,98.52,127.57,112.65,129.59,100.60,114.47,109.95,96.11,123.31,121.63,105.08],
-        21:[120.58,93.18,142.93,128.97,99.68,135.55,114.87,132.30,101.25,113.02,114.23,103.72,123.16,133.24,108.52],
-        22:[135.54,105.00,155.54,136.63,108.87,191.88,142.76,154.20,111.99,117.99,119.86,109.15,142.36,133.98,115.72],
-        23:[140.78,108.24,158.95,145.21,107.57,186.44,147.21,154.41,117.03,120.06,123.37,105.58,144.03,128.92,117.96],
-        24:[139.34,108.09,158.72,145.48,107.59,177.49,153.17,160.72,104.89,132.60,123.51,119.99,145.41,141.13,120.63],
-        25:[139.23,107.95,156.94,146.45,111.81,180.11,155.45,159.92,110.68,130.02,123.00,119.67,147.91,137.92,121.42],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-
-    NOV:{
-        17:[98.88,95.31,97.13,97.22,99.13,106.38,101.43,106.04,95.31,98.35,101.01,100.00,101.18,109.12,101.24],
-        18:[110.66,94.50,100.50,100.23,95.36,136.84,101.33,118.98,94.51,107.22,108.06,100.69,114.46,116.26,100.81],
-        19:[114.69,92.44,124.18,118.42,95.80,131.59,104.03,122.27,98.65,106.89,108.00,100.60,120.07,119.26,109.74],
-        20:[116.72,93.04,132.42,126.76,98.52,126.40,112.65,129.60,100.60,116.02,109.01,96.11,123.37,122.24,105.08],
-        21:[121.08,93.44,150.11,129.93,99.99,140.92,114.87,133.19,102.78,117.87,115.06,104.95,124.79,133.70,108.66],
-        22:[135.75,104.48,155.54,136.57,108.88,189.82,144.09,153.33,111.99,119.42,120.71,109.15,142.43,134.09,116.39],
-        23:[140.57,107.60,158.95,146.24,107.75,186.66,147.21,152.81,117.03,119.70,123.10,105.25,143.39,128.75,118.07],
-        24:[139.23,107.62,158.72,145.49,107.60,176.16,156.23,162.03,106.05,131.29,124.08,120.00,146.08,141.65,121.33],
-        25:[138.72,107.87,156.94,146.95,111.86,179.17,155.45,159.82,110.68,131.13,123.89,119.67,147.93,137.81,121.42],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    },
-
-    DEC:{
-        17:[98.88,94.50,97.13,97.22,98.78,107.37,101.32,110.33,94.50,102.53,101.03,100.17,101.18,111.63,101.12],
-        18:[110.66,95.75,100.50,100.23,95.36,138.22,101.33,119.36,95.75,107.63,108.59,100.69,114.46,116.58,100.81],
-        19:[114.65,92.38,124.97,120.22,96.04,129.88,105.80,125.04,101.39,107.29,108.93,100.62,122.40,119.44,112.38],
-        20:[116.50,92.85,132.42,126.76,98.52,126.31,112.65,129.79,100.60,114.49,109.45,97.70,123.47,122.12,105.08],
-        21:[121.23,93.60,150.11,130.41,100.37,141.46,115.95,133.86,103.82,118.90,114.13,104.95,125.29,133.39,108.66],
-        22:[135.71,108.14,153.72,139.60,109.40,187.98,150.26,160.31,116.48,121.55,122.18,110.19,143.83,136.75,116.87],
-        23:[140.50,108.05,158.95,146.24,107.75,187.55,147.21,154.45,117.03,118.85,124.05,105.25,142.91,128.64,118.07],
-        24:[138.99,107.43,158.72,145.47,108.19,178.05,156.23,161.47,103.53,130.79,123.52,119.94,145.61,140.25,121.26],
-        25:[139.03,107.42,156.94,146.95,111.86,179.32,155.45,159.89,110.68,130.39,124.31,119.67,147.86,136.82,121.42],
-        26:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    }
-
-
-};
-
-// === Initialize Highcharts ===
-let chart = Highcharts.chart('chartContainer', {
-    chart: { type: 'column' },
-    title: { text: 'Hover over a cell to view Price Index', fontFamily: 'Times New Roman', fontSize: '16px' },
-    
-    xAxis: {
-        categories: products.map(p => p.name),
-        labels: {
-            rotation: -45,
-            style: { fontSize: '13px', fontFamily: 'Times New Roman' }
-        }
-    },
-
-    yAxis: {
-        min: 0,
-        startOnTick: true,
-        endOnTick: true,
-        tickAmount: 6,
-        title: { text: 'Price Index', style: { fontFamily: 'Times New Roman' , fontSize: '13px'} }
-    },
-
-  tooltip: {
-    shared: true,
-    useHTML: true, // Crucial for using custom font sizes
-    backgroundColor: 'transparent gray', // Semi-transparent background for better readability
-    borderWidth: 1,
-    borderRadius: 10,
-    shadow: true,
-    padding: 15,
-    style: {
-        fontSize: '13px',      // Global popup text size
-        fontFamily: 'Times New Roman', textColor: 'yellow' // Global popup text color
-    },
-    headerFormat: '<div style="font-size: 18px; margin-bottom: 10px; color: #666; border-bottom: 1px solid #ddd; padding-bottom: 5px;">{point.date} - {point.key}</div>',
-    pointFormat: '<div style="display: flex; justify-content: space-between; align-items: center; min-width: 180px;">' +
-                 '<span style="color:{series.color}; font-weight: bold; font-family: Times New Roman; font-size: 13px;">● {series.name}: </span>' +
-                 '<span style="font-weight: 800; font-size: 28px; fontcolor: #1207ad; margin-left: 15px;">{point.y:.2f}</span>' +
-                 '</div>',
-    footerFormat: '',
-    // This makes the "hit area" bigger for mobile fingers
-    snap: 30 
-},
-
-
-    plotOptions: {
-        series: {
-            stickyTracking: false,
-            enableMouseTracking: true,
-            pointPadding: 0.15,
-            groupPadding: 0.1,
-            borderWidth: 0,
-            point: {
-                events: {
-                    click: function() {
-                        this.series.chart.tooltip.refresh(this);
-                    }
-                }
-            }
-        },
-        column: {
-            pointWidth: 18   // makes columns wider for phones
-        }
-    },
-
-    series: [{ name: 'Price Index', data: Array(products.length).fill(0) }],
-
-    // === Responsive rules for phones ===
-   responsive: {
-    rules: [
-        // === Phones ===
-        {
-            condition: { maxWidth: 600 },
-            chartOptions: {
-                chart: { height: 350 },
-                xAxis: {
-                    labels: { style: { fontSize: '10px', fontFamily: 'Times New Roman' }, rotation: -45 }
-                },
-                yAxis: {
-                    labels: { style: { fontSize: '10px', fontFamily: 'Times New Roman' } }
-                },
-                plotOptions: {
-                    column: { pointWidth: 16 } // narrow columns for phones
-                }
-            }
-        },
-        // === Desktop ===
-        {
-            condition: { minWidth: 601 },
-            chartOptions: {
-                chart: { height: 500 }, // taller chart for desktop
-                xAxis: {
-                    labels: { style: { fontSize: '20px', fontFamily: 'Times New Roman' }, rotation: -45 }
-                },
-                yAxis: {
-                    labels: { style: { fontSize: '20px', fontFamily: 'Times New Roman' } }
-                },
-                plotOptions: {
-                    column: { pointWidth: 40 } // wider columns for desktop
-                }
-            }
-        }
-    ]
-}
-});
-// === Update chart on hover ===
-function updateChart(month, date){
-    const values = priceData[month][date];
-    if(!values || values.length !== products.length || values.every(v=>v===0)){
-        alert(`No data for${month} ${date}`);
-        return;
-    }
-    document.getElementById('chartContainer').style.display='block';
-    chart.update({
-        title:{ text:`Price Index - ${month} ${date}th` },
-        series:[{ 
-    data: values.map((v,i) => ({
-        name: products[i].name,
-        y: v,
-        date: date + " " + month,
-        color: v<=100 ? 'green' : v<=140 ? 'orange' : 'red'
-    }))
-}]
-    }, true, true);
-    chart.reflow();
-
-     // === AUTO SCROLL TO CHART ===
-    document.getElementById("chartContainer").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-}
-
-// === Dynamically create table cells ===
-const months = ["JAN","FEB","MAR"];
-const dates = ["17","18","19","20","21","22","23","24","25","26"];
-const table = document.getElementById("priceTable");
-
-months.forEach(month => {
-    let row = table.insertRow();
-    let th = row.insertCell();
-    th.outerHTML = `<th>${month}</th>`;
-    dates.forEach(date=>{
-        let cell = row.insertCell();
-        cell.innerText = "Check";
-        cell.onclick = ()=>updateChart(month,date);
-    });
-});
-
-
-// Function to resize iframe dynamically to content
-function resizeChart3Iframe() {
-    const iframe = document.querySelector('#chart3-container iframe');
-    if (!iframe) return;
-    try {
-        const body = iframe.contentWindow.document.body;
-        const html = iframe.contentWindow.document.documentElement;
-        const height = Math.max(
-            body.scrollHeight,
-            body.offsetHeight,
-            html.clientHeight,
-            html.scrollHeight,
-            html.offsetHeight
-        );
-        iframe.style.height = height + 'px';
-    } catch (e) {
-        console.warn("Can't access iframe height (cross-origin?)");
-    }
-}
-
-// Resize after iframe loads
-document.querySelector('#chart3-container iframe').addEventListener('load', resizeChart3Iframe);
-
-// Resize when window changes (desktop or mobile)
-window.addEventListener('resize', resizeChart3Iframe);
-
-// remove repeated months
-table.deleteRow(-1);
-table.deleteRow(-1);
-table.deleteRow(-1);
-
-</script>
-
-<footer class="modern-footer">
-    <div class="footer-glass-content">
-        <!-- Top Section: Data Context -->
-        <div class="footer-main-info">
-            <div class="source-tag">
-                <span class="icon">📊</span>
-                <div>
-                    <strong>Data Source:</strong> Uganda Bureau of Statistics (UBOS)
-                    <p class="sub-text">Overall Construction Input Price Index (Base 2016/17 = 100)</p>
-                </div>
-            </div>
-            
-            <div class="period-box">
-                <span class="label">Analysis Period</span>
-                <span class="value">Jan 2016 – Jan 2017</span>
-            </div>
-        </div>
-
-        <div class="footer-separator"></div>
-
-        <!-- Middle Section: Authorship -->
-        <div class="author-credits">
-            <div class="viz-by">Visualization By: ODWAR DENISH NIXSION</div>
-    
-        </div>
-
-        <!-- Bottom Section: Pulse & Small Print -->
-        <div class="footer-bottom">
-            <div class="live-status">
-                <div class="pulse-icon"></div> Live Analytics System
-            </div>
-            <div class="copyright">&copy; 2026 Research Insight. All rights reserved.</div>
-        </div>
-    </div>
-</footer>
-
-<style>
-.modern-footer {
-    padding: 60px 20px 30px;
-    background: #00040a;
-    font-family: 'times new roman';
-    color: #faf9f9;
-}
-
-.footer-glass-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(212, 160, 23, 0.1);
-    border-radius: 24px;
-    padding: 40px;
-    backdrop-filter: blur(10px);
-}
-
-.footer-main-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.source-tag { display: flex; align-items: center; gap: 15px; }
-.source-tag .icon { font-size: 24px; }
-.sub-text { font-size: 13px; color: #8892b0; margin: 4px 0 0; }
-
-.period-box {
-    background: rgba(212, 160, 23, 0.1);
-    padding: 10px 20px;
-    border-radius: 12px;
-    border-left: 3px solid #d4a017;
-}
-
-.period-box .label { display: block; font-size: 13px; text-transform: uppercase; color: #fdf902; letter-spacing: 1px; }
-
-.footer-separator { height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.2), transparent); margin: 30px 0; }
-
-.author-credits { text-align: center; }
-.viz-by { font-size: 16px; color: #f2f3f8; text-transform: uppercase; margin-bottom: 8px; }
-.names { font-size: 18px; font-weight: 600; color: #d4a017; }
-.dot { height: 8px; width: 8px; background: #d4a017; display: inline-block; border-radius: 50%; margin: 0 10px; vertical-align: middle; }
-
-.social-tags { display: flex; justify-content: center; gap: 12px; margin-top: 15px; }
-.tag { font-size: 13px; color: #fff; text-decoration: none; padding: 5px 15px; border-radius: 50px; background: rgba(255,255,255,0.05); transition: 0.3s; }
-.tag:hover { background: #d4a017; color: #0b1c3d; }
-
-.footer-bottom { display: flex; justify-content: space-between; margin-top: 20px; font-size: 12px; color: #8892b0; }
-
-.pulse-icon { width: 10px; height: 10px; background: #fffb02; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 0 rgba(212, 160, 23, 0.4); animation: pulse 2s infinite; }
-
-@keyframes pulse { 
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(212, 160, 23, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 160, 23, 0); }
-}
-
-@media (max-width: 768px) {
-    .footer-main-info { flex-direction: column; text-align: center; }
-    .footer-bottom { flex-direction: column; align-items: center; gap: 10px; }
-}
-</style>
-
-
-</body>
+    <h2>OPIT TRADERS FARMERS COOPERATIVE SOCIETY LIMITED<br /></h2>
+    <p class="intro">
+      Omoro Town Council, Omoro District<br />
+      P.O. Box, .. Omoro(U)
+    </p>
+
+    <img src="./opit Traders.JPG" width="100%" alt="opit traders office" />
+    <p class="buildingdescription">Our office under contruction</p>
+    <section class="introduction">
+      <p>
+        <b>Introduction</b><br />
+        Historical Back ground Opit Traders Saving and Credit Network Loan
+        Association is a profit-oriented association which started as a small
+        enterprise group comprising of a few members who were businessmen and
+        women dealing in produce,and at the same time they were practicing
+        farming at small scale and majorly produce products. This was in the
+        year 2011, 31, July when the association started. It started with 15
+        members comprising of male and female. The group have come to know the
+        importance of being in the network, that it would be of economic
+        andsocial development.To focus on these effectively, they needed a
+        collective effort on basis of poverty eradication, self-reliance, social
+        infrastructure and business development. The group members agreed to
+        contribute a share of 0ne million (1,000,000=) per person at the being,
+        registration fee of ten thousand shillings (10,000=) and three thousand
+        (3,000=) monthly welfare. The creation of these pool of fund was
+        primarily to generate fund for lending to a qualified member as a loan.
+        Since 2011 the number of members joining the group has been rapidly
+        increasing. Currently the association has over 250 active members who
+        are both business persons, civil servants, and famers within the
+        community. Opit Traders Saving and Credit Network, LoanAssociation is
+        currently located at, Opit Upper Cell, Opit Central Ward, Omoro Town
+        Council. Omoro District, Northern Uganda.</p>
+
+
+      <h2 ="Location">Location</h2>
+      <!--map-->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d1588.0436160047195!2d32.47412033557595!3d2.610421386411607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sOpit%2C%20Omoro!5e1!3m2!1sen!2sug!4v1771749010544!5m2!1sen!2sug"
+        width="600"
+        height="450"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </section>
+    <h2>OUR LEARDERS</h2>
+    <img src="./leaders.jpg" width="100%" alt="opit traders leaders" />
+    <section class="conclusion">
+              <br>
+        <P><b>Vision;</b><br />
+        To improve livelihood, food security, savings, household incomes for the
+        members. And to be the leading loan and saving association in Northern
+        Uganda OBJECTIVES In agricultural objectives; To improve market
+        accessibility and increase competitiveness in the value chain. Example
+        high bargaining power, accessibility to credit, market information and
+        linkages To improve on the economic wellbeing of its members. To promote
+        bulking and group marketing of agricultural produce of the members of
+        the trader’s network. To manage, protect, sustain, utilize and ensure
+        that the members are benefiting from bulking and marketing. To encourage
+        trader’s participation and improve /uplift agricultural produce
+        business. Financial objectives; To assist the members of the society to
+        undertake income generating activities through provision of credit
+        facilities, encouraging savings and other financial services as may be
+        required by the members from time to time. To create avenue of lobbing
+        funds from the NGOs and other agencies. To deliver financial education,
+        child rights awareness, health care, agriculture and entrepreneurship
+        training. (business skill). To create pool of funds for credit, that
+        shall be lent out to a qualified member. To encourage thrift among the
+        members by offering an opportunity to accumulating their savings.
+        <h3>Cooperative Lesson on safeguarding maize from a pest</h3>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/3sTTCzev97I?si=CsF1XqpwXa6k6H9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <b>Activities done by the OTSCNW</b><br />
+        There are two broad activities carried out by the associations that is;
+        Loan; The association has two types of loans interest that is 15% for
+        non-members and 10% for shareholders in a period of six months and ten
+        months respectively. The loan principle is given to the client depending
+        on the security pledged. Normally the most preferred security is land
+        and motorcycle or vehicles where the document presented are land sale
+        agreement and log book respectively. Additionally, photos of a pledged
+        collaterals and the business are printed and put in the file for more
+        evidence. They also consider the two guarantors’ consent. The first
+        should be immediate person (husband or wife) and the second guarantor
+        should be a person with the share or having an account with the
+        association. Normally priority is given to shareholders.
+
+        <b>Types of loan</b>
+        The most preferred are business loans, motorcycle loans and agricultural
+        loan they normally deal in agricultural equipment and tools. To the
+        smaller scale the loans are given for school fees loans. Savings
+        Associations requires members to save in two ways; Firstly, we have
+        volunteering saving, this is where the member saves on his or her own
+        will and there is compulsory saving where 10% is charged on loan
+        principle borrowed. Share sailing Share is predominately done by the
+        board of directors and also the person whom is supposed to buy. The
+        executive board of directors normally consider the following the truck
+        record of the client for the past two years that is how he had been
+        Managing the loan, the level of cooperation with other members, honesty
+        and the capability of a person. Farming The association has the farm
+        land where they grow crops (maize, sorghum, soya) for commercial
+        purpose. And its members are engaged in the commercial farming and they
+        have the capacity of bulk produce. Market The association has a
+        committee who look for market for association produce and for the
+        members as well. Achievements Acquisition of land: The association was
+        able to acquire a plot of land in Opit Upper Cell where the office block
+        sits, aplot of land in Lwala Centre, farm land at Te-Got in Omolo
+        village 40 acres, two acres in Loyoajonga, and one acre at Ngai. The
+        total sum of 43 acres. Office block:The association was able to
+        construct the office premises in Opit Central Ward, Omoro Town Council
+        The Association is able to produce farm products at a bulk given a high
+        output. Members were able to transform from substance agriculture to
+        commercial farming. The members haveadopted positive saving culture
+        which has made it easier for them to improve on their economic status
+        and theliving status of living of the members The association was able
+        to link up with the factories for sale of their farm products at a
+        reasonable and good price. The association was able earn profits from
+        the shares contributed by the members. The community were able to access
+        the financial services from the associations like savings (banking),
+        loans. The association was able to impact positive mind set change to
+        the members through trainings, sensitization, impacting business skills
+        and farming skills. The association was able to create unity,
+        cooperation among the members. Members were able to acquire personal
+        assets through which are expensive like land, motorcycle and paying of
+        school fees. Challenges Farm challenges; Expensive farm equipment’s and
+        tools; association uses a lot of money (fund) in hiring farm equipment’s
+        like tractor for instances to plough 40 acres requires 4million per
+        ploughing also other farm equipment like sprayer, thrusting machine and
+        tool farms like hand holes, slashes. Lack of transport like truck to
+        transport the produce from the field to the store as well as to the
+        market. Lack of enough labor force; man power has been a problem during
+        planting, harvesting period. The association was also facing a challenge
+        of counterfeit Agroinput. Some of the Agro input are substandard. Like
+        the pest sides, poor quality seeds. Lack of harvestingequipment’slike
+        tubulins, bagging, combine harvesters. Maize thrusters’ machines. Lack
+        of storage facilities the association has no storage facility which
+        sometimes forces the sale of the products at a low price due to high
+        cost of rent and store space. Climatic change; change in whether
+        conditions that is to say unreliable rainfall, as lead to low
+        yield/production of products giving losses to the association.
+        Additionally, the association uses some Agro chemicals to protect the
+        crops from strong sunshine. Pest and diseases; this has been a problem
+        in that to control pest and diseases the association uses a lot of money
+        to buy Agro chemicals like pest sides. Hence high cost of productions.
+        Low price of agricultural produce especially during harvesting season
+        which force association to store the produce so that it waits for the
+        season when the price has shot up yet association keep meeting the cost
+        of renting a store. Financial challenges The emergency of COVID 19 in
+        2020 to 2022, our clients who had taken loans failed to pay back and the
+        clients applying for loan reduced thus forcing the association to
+        undergo a financial loss Lack of office equipment like safe, strong
+        cupboards, office tables, office chairs. The association depends on
+        manual work which are very tiresome and slow, making serving a client
+        difficult and time wasting compared to computer usage. Lack of
+        sufficient liquidity and low risk management, the association is
+        sometimes over whelmed by customers (borrowers) which results into poor
+        credit worthiness and loss of members confidence since the money for
+        loan is not enough. Leadership challenges; the leaders of the
+        associations lack leadership skill and knowledge especially in human
+        resource management. Poor record keeping due to lack of knowledge and
+        accounting principles. normally the office bearer has limited knowledge
+        on classifying different accounts and book keeping which makes auditing
+        difficult and time consuming to make the report. Poor loan recovery;
+        some clients’ needs follow up right from their homes in order to recover
+        the loan or the security. this sometimes demand involvement of more
+        members to go for operations which is expensive in term of transport
+        because association has no transport means so they base on hiring
+        motorcycle. The office plot is surveyed by the district officials but to
+        our surprise the Omoro Town Council team that was pegging a road pegged
+        part of our office block. due to this, members morale has gone down. We
+        request the district leadership to help us on this issue Recommendations
+        Agricultural recommendations; Since association has43 acres of farm
+        lands for practicing agriculture (cultivation) this require use of
+        advance technology (equipment) like tractors, combine harvesters,
+        thrusters’ machines this equipment are too expensive to be acquired by
+        the association in the shortest period of time. We therefore request for
+        any support rendered. Additionally, last year the association used a lot
+        of money for hiring these machines which reduced on profit margin from
+        the produce. Recommendation on store; this is yet another very expensive
+        asset to acquire yet it is very important to store the produce and sale
+        the produce when the price of the produce is high. As the association we
+        therefore request the government to establishment store facilities the
+        association. This will help the association to get good profit from the
+        produce product hence the association will realize good profit from
+        value addition. We recommend that the government or any supportive body
+        to support in establishing /acquisition of maize millers, rice miler
+        andoil processing machines (e.g. sunflower, soya beans, G-nuts and
+        sesame processing machine) so that we are able to process our produce to
+        finished goods (value addition). This will enable the association to
+        maximize the profits from their produce since they are able to sell even
+        the by-products like sunflower cakes, maize brand. Hence realizing good
+        profit. The challenge of climatic change, we request government to
+        support us with the establishment of irrigation system. This would help
+        to realize high production. The challenge of low price being faced, we
+        request for government to link the association with some big companies’
+        agencies who use the produce. The association is faced with transport
+        challenge, to transport their produce from the farm to the store and
+        market at large. We therefore, request for the provision of a truck to
+        aid in the transportation of the produce from the farm to store and
+        market. Therefore, by supporting the association with the truck will
+        help reduce the cost of transportation of the produce to the store and
+        also would enable the association to access the markets which are
+        friendly in pricing. Hence development. Financial recommendations: We
+        recommend that, if the government/stakeholders or NGOs could support us
+        with office equipment’s like safe, strong cupboard and computers. This
+        would improve the quality of services, proper record keeping and data
+        management controls and assured security of the office assets. Since the
+        association is faced with the challenge of liquidity, we request for the
+        government, NGOs and stakeholder’s intervention to support this
+        associate with grants so that they are able to give service to surplus
+        clients. We recommend that the government, NGOs, andwell-wishers provide
+        leadership trainings in managerial skills and financial literacy
+        especially in book keeping, human resource management and
+        entrepreneurship skill development. We recommend that the problem of
+        poor loan recovery which is due to high cost of follow up as a result of
+        motorcycle hiring, we request for a provision of transportmeans that is
+        motorcycles Future plan Transformation of the association into a Sacco
+        and a near future to a community bank with the aim to provide accessible
+        services to the members and the community Setting up a demonstration
+        farm for crop production as well as animal and poultry which covers 10
+        acres of land for study purposes, income generation, Establishment of
+        Agro processing industry for value addition e.g. maize miller, rice
+        holler, tractor, and Construction of a ware house for storage of produce
+        value addition To acquire 5 acres of land within Omoro Town Council for
+        the establishment of a value addition industry To acquire heavy duty
+        machinery like tractors for ploughing farm land To provide affordable
+        and accessible financial services, which will save a lot due to the
+        distance from Omoro to Gulu for financial services To acquire land
+        tittle for all the land owned by the association
+      </p>
+    </section>
+
+    <section class="refer">
+      We are working together with the community and other organization within
+      the community so that we succed in our mission to help the farmers and the
+      community in general so that we succed in our mission to help the farmers
+      and the community in general to improve their livelihood and the economy
+      of the communityso that we succed in our mission to help the farmers and
+      the community in general to improve their livelihood and the economy of
+      the communityso that we succed in our mission to help the farmers and the
+      community in general to improve their livelihood and the economy of the
+      communityso that we succed in our mission to help the farmers and the
+      community in general to improve their livelihood and the economy of the
+      community
+    </section>
+
+    <footer>All right reserved @2026 Opit Traders Cooperative Limited</footer>
+  </body>
+  <script src="./app.js"></script>
 </html>
